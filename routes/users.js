@@ -3,12 +3,12 @@ const router = express.Router()
 
 // Iniciar sesión
 router.get('/users/signin', (req, res) => {
-    res.send('Iniciando Sesión')
+    res.render('users/signIn')
 })
 
 // Registrar usuario get
 router.get('/users/signup', (req, res) => {
-    res.send('Formulario de autenticación')
+    res.render('users/signUp')
 })
 
 
