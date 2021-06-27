@@ -1,1 +1,32 @@
-<h1>Registrarse</h1>
+<div class="row">
+    <div class="col-md-4 mx-auto">
+        <div class="card">
+        <div class="card-header">
+            Registar Cuenta
+        </div>
+            <div class="card-body">
+                <form action="/users/signup" method="POST">
+                    <div class="form-label">
+                        <input type="text" class="form-control" name="name" placeholder="Nombre" value="{{name}}">
+                    </div>
+
+                    <div class="form-label">
+                        <input type="email" class="form-control" name="email" placeholder="Email" value="{{email}}">
+                    </div>
+
+                    <div class="form-label">
+                        <input type="password" class="form-control" name="password" placeholder="Contraseña" value="{{password}}">
+                    </div>
+
+                    <div class="form-label">
+                        <input type="password" class="form-control" name="confirmPassword" placeholder="Contraseña" value="{{confirmPassword}}">
+                    </div>
+
+                    <div class="form-label">
+                        <button type="submit" class="btn btn-primary col-12 mt-2">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
