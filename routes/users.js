@@ -68,6 +68,12 @@ router.post('/users/signup', async (req, res) => {
 
 })
 
+// LogOut Routes get
+router.get('/users/logout', (req, res) => {
+    req.logout()
+    res.redirect('/')
+})
+
 /*FUNCIONES PROPIAS*/
 //Función validar email
 function validateEmail(email) {

@@ -1,9 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Note = require('../models/note')
+const {isAuthenticated} = require('../helpers/auth')
 
 //All notes index
-router.get('/notes', async (req, res) => {
+router.get('/notes', isAuthenticated, async (req, res) => {
     //Buscamos todas las notas, las ordenamos descendiente
     const notes = await Note.find().sort({ date: 'desc'})
     //Renderizamos la página de todas las notas
@@ -11,13 +12,14 @@ router.get('/notes', async (req, res) => {
 })
 
 // GET del formulario para agregar notas
-router.get('/notes/add', (req, res) => {
+//Utilizamos isAuthenticated para verificar si está en una sesión de usuario
+router.get('/notes/add', isAuthenticated, (req, res) => {
     //Renderizamos la vista newNote para agregar notas
     res.render('notes/newNote')
 })
 
 // POST del formulario para agregar notas 
-router.post('/notes/newNote', async (req, res) => {
+router.post('/notes/newNote', isAuthenticated, async (req, res) => {
     // Utilizamos los parametros de notes => title y description
     const { title, description} = req.body
     // Si hay errores
@@ -49,7 +51,7 @@ router.post('/notes/newNote', async (req, res) => {
 })
 
 // Routes para editar notas
-router.get('/notes/edit/:id', async (req, res) => {
+router.get('/notes/edit/:id', isAuthenticated, async (req, res) => {
     //Buscamos por id de la nota para editar
     const note = await Note.findById(req.params.id)
     // Si funciona bien entonces editará la nota
@@ -57,7 +59,7 @@ router.get('/notes/edit/:id', async (req, res) => {
 })
 
 // Routes PUT para editar notas
-router.put('/notes/editNote/:id', async (req, res) => {
+router.put('/notes/editNote/:id', isAuthenticated, async (req, res) => {
     // Utilizamos los parametros de notes => title y description
     const { title, description} = req.body
     // Buscamos por id y editamos la nota => le pasamos el id, el titulo y la descripcion
@@ -69,7 +71,7 @@ router.put('/notes/editNote/:id', async (req, res) => {
 })
 
 // Routes para eliminar
-router.delete('/notes/delete/:id', async (req, res) => {
+router.delete('/notes/delete/:id', isAuthenticated, async (req, res) => {
     // Buscamos la nota por id y eliminamos esa nota seleccionada
     await Note.findByIdAndDelete(req.params.id)
     // Mensaje satisfactorio de flash

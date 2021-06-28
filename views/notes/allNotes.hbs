@@ -18,8 +18,9 @@
         </div>
     </div>
     {{else}}
-    <div class="card mx-auto">
+    <div class="card text-center w-50 mx-auto">
         <div class="card-body">
+            <h1>Hola {{ user.name }}</h1>
             <p class="lead">No existen notas</p>
             <a href="/notes/add" class="btn btn-success col-12 mt-4">Crear Nota</a>
         </div>
