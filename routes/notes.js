@@ -5,8 +5,8 @@ const {isAuthenticated} = require('../helpers/auth')
 
 //All notes index
 router.get('/notes', isAuthenticated, async (req, res) => {
-    //Buscamos todas las notas, las ordenamos descendiente
-    const notes = await Note.find().sort({ date: 'desc'})
+    //Buscamos todas las notas correspondientes a un usuario en especifico, las ordenamos descendiente
+    const notes = await Note.find({ user: req.user.id }).sort({ date: 'desc'})
     //Renderizamos la página de todas las notas
     res.render('notes/allNotes', { notes })
 })
@@ -41,6 +41,8 @@ router.post('/notes/newNote', isAuthenticated, async (req, res) => {
     } else {
         // Si no existen errores entonces agrega una nueva nota
         const newNote = new Note({ title, description})
+        // Usamos esto para que guarde la nota propia en el usuario => Si escribo una nota con mi usuario solo queda en MI CUENTA
+        newNote.user = req.user.id
         // Guardamos la nota en la base de datos
         await newNote.save()
         // Agregamos el mensaje de flash => Que se agregó correctamente

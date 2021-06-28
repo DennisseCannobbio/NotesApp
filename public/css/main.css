@@ -4,6 +4,16 @@ body {
     background: linear-gradient(to right, #92FE9D, #00C9FF); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+html {
+    height: 100%;
+}
+
 .logo {
-    width: 50%;
+    width: 30%;
+}
+
+footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
